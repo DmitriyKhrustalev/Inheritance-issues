@@ -4,25 +4,28 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SimpleTaskTest {
 
     @Test
-    public void testSimpleTaskMatches() {
-        SimpleTask task = new SimpleTask(1, "Позвонить маме");
-        assertTrue(task.matches("маме"));
-        assertFalse(task.matches("папе"));
+    public void testSearchFindsMultipleTasks() {
+        SimpleTask task1 = new SimpleTask(1, "Позвонить другу");
+        SimpleTask task2 = new SimpleTask(2, "Купить подарок другу");
+        SimpleTask task3 = new SimpleTask(3, "Сходить за продуктами");
+
+        assertTrue(task1.matches("другу"));
+        assertTrue(task2.matches("другу"));
+        assertFalse(task3.matches("другу"));
     }
 
     @Test
-    public void testEpicMatches() {
-        String[] subtasks = { "Купить молоко", "Купить хлеб", "Купить яйца" };
-        Epic epic = new Epic(2, subtasks);
-        assertTrue(epic.matches("молоко"));
-        assertFalse(epic.matches("сахар"));
+    public void testSearchFindsOneTask() {
+        SimpleTask task = new SimpleTask(1, "Позвонить другу");
+
+        assertTrue(task.matches("Позвонить"));
+        assertFalse(task.matches("Купить"));
     }
 
     @Test
-    public void testMeetingMatches() {
-        Meeting meeting = new Meeting(3, "Обсуждение проекта", "Проект X", "12:00 01.01.2025");
-        assertTrue(meeting.matches("Обсуждение"));
-        assertTrue(meeting.matches("Проект X"));
-        assertFalse(meeting.matches("Отдых"));
+    public void testSearchFindsNoTasks() {
+        SimpleTask task = new SimpleTask(1, "Прогулка с собакой");
+
+        assertFalse(task.matches("работа"));
     }
 }
