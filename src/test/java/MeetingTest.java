@@ -10,6 +10,7 @@ public class MeetingTest {
 
         assertTrue(meeting1.matches("проекта"));
         assertTrue(meeting2.matches("проекта"));
+        assertFalse(meeting1.matches("работа"));
     }
 
     @Test

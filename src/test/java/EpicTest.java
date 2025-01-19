@@ -5,10 +5,12 @@ public class EpicTest {
 
     @Test
     public void testSearchFindsMultipleSubtasks() {
-        String[] subtasks = {"Купить молоко", "Купить хлеб", "Купить яйца"};
+        String[] subtasks = {"Купить молоко", "Купить хлеб", "Купить подарок другу"};
         Epic epic = new Epic(1, subtasks);
 
         assertTrue(epic.matches("Купить"));
+        assertTrue(epic.matches("другу"));
+        assertFalse(epic.matches("работа"));
     }
 
     @Test
