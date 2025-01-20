@@ -1,18 +1,11 @@
 import java.util.Arrays;
-import java.util.Objects;
 
-
-public class Epic {
-    protected int id;
-    protected String[] subtasks;
+public class Epic extends Task {
+    private String[] subtasks;
 
     public Epic(int id, String[] subtasks) {
-        this.id = id;
+        super(id);
         this.subtasks = Arrays.copyOf(subtasks, subtasks.length);
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String[] getSubtasks() {
@@ -20,18 +13,6 @@ public class Epic {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Epic epic = (Epic) o;
-        return id == epic.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     public boolean matches(String query) {
         for (String subtask : subtasks) {
             if (subtask.contains(query)) {
@@ -41,4 +22,3 @@ public class Epic {
         return false;
     }
 }
-
